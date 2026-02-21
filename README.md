@@ -1,3 +1,131 @@
+# Overview
+
+This project analyzes U.S. data job postings to uncover the most in-demand skills, salary trends, and optimal skill combinations for aspiring and current data professionals. Focusing on three major roles—Data Analyst, Data Scientist, and Data Engineer—the analysis identifies common core skills (such as SQL and Python), role-specific technical requirements, and how these skills translate into compensation.
+
+The findings show a strong shared technical foundation across data careers, with SQL and Python consistently ranking as top skills. However, each role differentiates itself through specialized tools and responsibilities. Data Analysts emphasize SQL, Excel, and visualization tools like Tableau and Power BI. Data Scientists require deeper statistical and machine learning expertise, heavily centered on Python. Data Engineers focus on infrastructure-related skills, including cloud platforms and big data technologies.
+
+Beyond skill demand, the project also explores salary distribution across roles and highlights the relationship between specific skills and pay. Senior-level positions command significantly higher compensation, and technical specialization—particularly in Python, SQL, and cloud technologies—correlates strongly with higher median salaries. For Data Analysts specifically, the most optimal skills balance both high demand and high pay, with Python and SQL standing out as the strongest strategic investments.
+
+# Questions
+
+Analytical Questions Addressed in This Project
+
+1. What are the most demanded skills for the top three most popular data roles?
+2. How are in-demand skills trending for Data Analysts?
+3. How well do data roles and skills pay for Data Analysts?
+4. What are the most optimal skills to learn for Data Analysts?
+
+# Tools & Technologies Used
+## 🐍 Programming & Analysis
+
+- Python – Core language used for data cleaning, transformation, analysis, and visualization.
+
+- Pandas – Data manipulation and aggregation.
+
+- NumPy – Numerical computations.
+
+## 📊 Data Visualization
+
+- Matplotlib – Base plotting library for custom visualizations and formatting.
+
+- Seaborn – Statistical data visualization (bar plots, box plots, scatter plots).
+
+## 📓 Development Environment
+
+- Jupyter Notebook – Interactive coding, analysis workflow, and documentation.
+
+- Anaconda (if applicable) – Environment and package management.
+
+## 🗂 Data Handling
+
+- CSV datasets (job postings & salary data)
+
+- Data cleaning and preprocessing techniques (groupby, aggregation, filtering, percentage calculations)
+
+## 📈 Analytical Techniques
+
+- Skill frequency analysis
+
+- Percentage distribution calculations
+
+- Trend analysis over time
+
+- Salary distribution analysis (boxplots)
+
+- Demand vs. salary optimization (scatter plot analysis)
+
+# Data Preparation & Cleanup
+
+Before conducting the analysis, the dataset was cleaned and prepared to ensure accuracy, consistency, and reliability of insights. The key data preparation steps included:
+
+### 1️⃣ Data Loading & Initial Inspection
+
+- Imported job posting and salary datasets into Pandas DataFrames.
+
+- Reviewed dataset structure using .info(), .head(), and .describe() to identify missing values and data types.
+
+### 2️⃣ Handling Missing Values
+
+- Removed rows with missing or invalid salary data when performing salary analysis.
+
+- Filtered out records without listed skills when calculating skill demand.
+
+- Ensured null values did not distort percentage or median calculations.
+
+### 3️⃣ Data Type Corrections
+
+- Converted salary fields to numeric format for accurate aggregation.
+
+- Parsed date columns into datetime format for monthly trend analysis.
+
+- Standardized categorical fields such as job titles.
+
+### 4️⃣ Filtering & Standardizing Job Titles
+
+- Focused analysis on the most relevant roles:
+
+  - Data Analyst
+
+  - Data Scientist
+
+  - Data Engineer
+
+- Standardized job title naming (e.g., grouping similar variations under one category).
+
+### 5️⃣ Skill Extraction & Normalization
+
+- Split multi-skill fields into individual skills.
+
+- Standardized skill names (e.g., handling capitalization differences like “Python” vs “python”).
+
+- Counted skill frequency across job postings.
+
+- Calculated skill demand percentage per role:
+
+   Skill Percentage = Skill Count / Total Job Postings for Role × 100
+
+### 6️⃣ Salary Aggregation
+
+- Calculated median yearly salaries by:
+
+  - Job title
+
+  - Individual skill
+
+- Removed extreme outliers only when necessary for visualization clarity (without distorting core insights).
+
+### 7️⃣ Final Analytical Dataset Creation
+
+- Created aggregated DataFrames for:
+
+- Top skills per job role
+
+- Skill demand trends over time
+
+- Salary distribution by role
+
+- Skill demand vs. median salary comparison
+
 # The Analysis
 
 ## 1. What are the most demanded skills for the top 3 most popular data roles?
@@ -140,3 +268,37 @@ ax[1].xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'${int(x/1000)}K
 - SQL remains a foundational requirement: SQL and SQL Server consistently rank high in both charts, indicating that database querying is a must-have skill for data analysts across industries.
 
 - Conclusion: To maximize both employability and salary as a data analyst, focus on Python + SQL + a visualization tool (Tableau or Power BI). These combined skills provide the strongest competitive advantage in today’s market.
+
+## 4. What is the most optimal skills to learn for Data Analysts?
+
+### Visualize Data
+
+```python
+sns.scatterplot(
+    data=df_plot,
+    x='skill_percent',
+    y='median_salary',
+    hue='technology'
+)
+sns.despine()
+sns.set_theme(style='ticks')
+sns.set
+plt.xlabel('Percent of Data Analyst Jobs')
+plt.ylabel('Median Yearly Salary')
+plt.title('Most optimal skills for Data Analyst in the US')
+plt.tight_layout()
+plt.show()
+```
+
+### Results
+
+![Most Optimal Skills for Data Analyst in the US](project/chart_images/optimal_skills_1.png)
+*A scatter plot visualizing the most optimal skills (high payning & high demand) for data analyst in the US*
+
+### Insights:
+
+- Python stands out as the highest-paying skill among those listed, with a median salary close to $98K. It also appears in a significant portion of job postings (around one-third), showing that it is both valuable and in demand. This makes Python one of the most strategic skills for data analysts aiming to maximize their earning potential.
+
+- SQL is the most in-demand skill overall, appearing in more than half of job postings (nearly 60%). While its median salary is slightly lower than Python’s, at around $91K, it remains very competitive. This suggests that SQL is a foundational requirement for data analyst roles in the US job market.
+
+- In contrast, tools like Excel, Word, and PowerPoint are associated with lower median salaries, generally in the $81K–$85K range. Even though Excel has relatively high demand, it does not command premium compensation. This indicates that advanced technical skills such as programming and specialized analytics tools tend to drive higher salaries than basic productivity software.
